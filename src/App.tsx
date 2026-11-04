@@ -192,11 +192,13 @@ export function App() {
         )}
       </div>
 
-      {/* 4-Tab Bottom Navigation Bar: Fixed to viewport and ALWAYS visible */}
-      <BottomNav
-        activeTab={activeTab}
-        onTabChange={handleTabChange}
-      />
+      {/* 4-Tab Bottom Navigation Bar: Hidden during full-screen story viewing */}
+      {activeStoryIndex === null && (
+        <BottomNav
+          activeTab={activeTab}
+          onTabChange={handleTabChange}
+        />
+      )}
     </>
   );
 }
