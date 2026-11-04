@@ -17,6 +17,8 @@ describe('USER_PROFILE Data Integrity', () => {
     expect(USER_PROFILE.linkedin).toContain('pratik-s-pawar');
     expect(USER_PROFILE.portfolioUrl).toContain('psp-02-portfolio.netlify.app');
     expect(USER_PROFILE.postsCount).toBe(2);
+    expect(USER_PROFILE.bio).toContain('Thinker & AI Builder');
+    expect(USER_PROFILE.bio).toContain('Sow me and you will reap growth');
   });
 });
 

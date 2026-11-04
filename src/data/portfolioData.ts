@@ -5,7 +5,7 @@ export const USER_PROFILE = {
   fullName: 'Pratik S Pawar',
   title: 'MSc IT Graduate & AI Builder',
   avatar: '/profile.png',
-  bio: '🎓 MSc IT Graduate • 💻 Full-Stack & AI Builder • ⚡ Building responsive & secure web products\n📍 Mumbai, India • 🌐 Open for opportunities',
+  bio: '🎓 MSc IT Graduate • 💻 Thinker & AI Builder • \n📍 Mumbai, India •🌱Sow me and you will reap growth • 🌐 Open for opportunities',
   phone: '+91-8928260115',
   email: 'pratikpawar0222@gmail.com',
   github: 'https://github.com/PratikPawar020403',
