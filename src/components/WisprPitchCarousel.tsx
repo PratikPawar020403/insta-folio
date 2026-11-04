@@ -12,11 +12,11 @@ const VoiceWaveGraphic: React.FC<{ color: string }> = ({ color }) => {
   const bars = [25, 45, 65, 35, 75, 95, 60, 100, 85, 50, 90, 70, 40, 80, 95, 65, 45, 70, 50, 30, 20];
 
   return (
-    <div className="flex items-center justify-center gap-1.5 h-14 my-3 px-4">
+    <div className="flex items-center justify-center gap-1 sm:gap-1.5 h-9 sm:h-12 my-1 sm:my-2 px-3">
       {bars.map((height, i) => (
         <span
           key={i}
-          className="w-1.5 rounded-full transition-all duration-300"
+          className="w-1 sm:w-1.5 rounded-full transition-all duration-300"
           style={{
             height: `${height}%`,
             backgroundColor: color,
@@ -67,7 +67,7 @@ export const WisprPitchCarousel: React.FC<WisprPitchCarouselProps> = ({
           bg: colors.darkBg,
           isDark: true,
           content: (
-            <div className="flex flex-col items-center justify-between h-full p-6 sm:p-8 text-center">
+            <div className="flex flex-col items-center justify-between h-full p-3.5 sm:p-5 text-center">
               {/* Top small label */}
               <div className="pt-2">
                 <span
@@ -120,7 +120,7 @@ export const WisprPitchCarousel: React.FC<WisprPitchCarouselProps> = ({
           bg: colors.lightBg,
           isDark: false,
           content: (
-            <div className="flex flex-col items-center justify-between h-full p-6 sm:p-8 text-center">
+            <div className="flex flex-col items-center justify-between h-full p-3.5 sm:p-5 text-center">
               <div className="pt-2">
                 <span
                   className="inline-block text-[11px] sm:text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full border"
@@ -160,7 +160,7 @@ export const WisprPitchCarousel: React.FC<WisprPitchCarouselProps> = ({
           bg: colors.darkBg,
           isDark: true,
           content: (
-            <div className="flex flex-col items-center justify-between h-full p-6 sm:p-8 text-center">
+            <div className="flex flex-col items-center justify-between h-full p-3.5 sm:p-5 text-center">
               <div className="pt-2">
                 <span
                   className="inline-block text-[11px] sm:text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full border"
@@ -200,7 +200,7 @@ export const WisprPitchCarousel: React.FC<WisprPitchCarouselProps> = ({
           bg: colors.lightBg,
           isDark: false,
           content: (
-            <div className="flex flex-col items-center justify-between h-full p-6 sm:p-8 text-center">
+            <div className="flex flex-col items-center justify-between h-full p-3.5 sm:p-5 text-center">
               <div className="pt-2">
                 <span
                   className="inline-block text-[11px] sm:text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full border"
@@ -250,7 +250,7 @@ export const WisprPitchCarousel: React.FC<WisprPitchCarouselProps> = ({
           bg: colors.darkBg,
           isDark: true,
           content: (
-            <div className="flex flex-col items-center justify-between h-full p-6 sm:p-8 text-center">
+            <div className="flex flex-col items-center justify-between h-full p-3.5 sm:p-5 text-center">
               <div className="pt-2">
                 <span
                   className="inline-block text-[11px] sm:text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full border"
@@ -378,7 +378,7 @@ export const WisprPitchCarousel: React.FC<WisprPitchCarouselProps> = ({
           bg: colors.darkBg,
           isDark: true,
           content: (
-            <div className="flex flex-col items-center justify-between h-full p-6 sm:p-8 text-center">
+            <div className="flex flex-col items-center justify-between h-full p-3.5 sm:p-5 text-center">
               <div className="pt-2">
                 <span
                   className="inline-block text-[11px] sm:text-xs font-semibold tracking-wider uppercase px-3.5 py-1 rounded-full border"
@@ -428,7 +428,7 @@ export const WisprPitchCarousel: React.FC<WisprPitchCarouselProps> = ({
           bg: colors.lightBg,
           isDark: false,
           content: (
-            <div className="flex flex-col items-center justify-between h-full p-6 sm:p-8 text-center">
+            <div className="flex flex-col items-center justify-between h-full p-3.5 sm:p-5 text-center">
               <div className="pt-2">
                 <span
                   className="inline-block text-[11px] sm:text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full border"
@@ -468,7 +468,7 @@ export const WisprPitchCarousel: React.FC<WisprPitchCarouselProps> = ({
           bg: colors.darkBg,
           isDark: true,
           content: (
-            <div className="flex flex-col items-center justify-between h-full p-6 sm:p-8 text-center">
+            <div className="flex flex-col items-center justify-between h-full p-3.5 sm:p-5 text-center">
               <div className="pt-2">
                 <span
                   className="inline-block text-[11px] sm:text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full border"
@@ -508,7 +508,7 @@ export const WisprPitchCarousel: React.FC<WisprPitchCarouselProps> = ({
           bg: colors.lightBg,
           isDark: false,
           content: (
-            <div className="flex flex-col items-center justify-between h-full p-6 sm:p-8 text-center">
+            <div className="flex flex-col items-center justify-between h-full p-3.5 sm:p-5 text-center">
               <div className="pt-2">
                 <span
                   className="inline-block text-[11px] sm:text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full border"
@@ -567,7 +567,7 @@ export const WisprPitchCarousel: React.FC<WisprPitchCarouselProps> = ({
           bg: colors.darkBg,
           isDark: true,
           content: (
-            <div className="flex flex-col items-center justify-between h-full p-6 sm:p-8 text-center">
+            <div className="flex flex-col items-center justify-between h-full p-3.5 sm:p-5 text-center">
               <div className="pt-2">
                 <span
                   className="inline-block text-[11px] sm:text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full border"
@@ -733,7 +733,7 @@ export const WisprPitchCarousel: React.FC<WisprPitchCarouselProps> = ({
   };
 
   return (
-    <div className="relative w-full aspect-square overflow-hidden select-none group">
+    <div className="relative w-full h-[280px] xs:h-[320px] sm:h-[370px] max-h-[44dvh] overflow-hidden select-none group">
       {/* 1/6 Slide Counter Badge (Top Right, Instagram Style) */}
       <div className="absolute top-3 right-3 z-20 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-[11px] font-semibold shadow-md pointer-events-none">
         {currentSlide + 1}/{totalSlides}

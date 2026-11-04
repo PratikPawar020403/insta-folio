@@ -100,11 +100,11 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onSharePost }) => {
   };
 
   return (
-    <article className="w-full bg-white dark:bg-black border-y sm:border sm:rounded-xl border-neutral-200 dark:border-neutral-800 transition-colors duration-200 overflow-hidden mb-4 sm:mb-6">
+    <article className="w-full bg-white dark:bg-black border-y sm:border sm:rounded-xl border-neutral-200 dark:border-neutral-800 transition-colors duration-200 overflow-hidden mb-3 sm:mb-4">
       {/* Post Header */}
-      <div className="px-3.5 py-3 flex items-center justify-between">
+      <div className="px-3.5 py-2 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-full p-[1.5px] story-gradient cursor-pointer hover:opacity-90">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full p-[1.5px] story-gradient cursor-pointer hover:opacity-90 flex-shrink-0">
             <img
               src={post.author.avatar}
               alt={post.author.username}
@@ -112,16 +112,16 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onSharePost }) => {
             />
           </div>
           <div>
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1.5 leading-none">
               <span className="text-xs font-bold text-neutral-900 dark:text-white hover:underline cursor-pointer">
                 {post.author.username}
               </span>
               {post.author.isVerified && (
-                <CheckCircle size={12} className="text-blue-500 fill-blue-500" />
+                <CheckCircle size={11} className="text-blue-500 fill-blue-500" />
               )}
             </div>
             {(post.subtitle || post.author.location) && (
-              <p className="text-[11px] text-neutral-500 dark:text-neutral-400 font-normal">
+              <p className="text-[10px] text-neutral-500 dark:text-neutral-400 font-normal mt-0.5 truncate max-w-[220px] sm:max-w-xs">
                 {post.subtitle || post.author.location}
               </p>
             )}
@@ -132,7 +132,7 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onSharePost }) => {
           className="text-neutral-500 hover:text-neutral-900 dark:hover:text-white p-1 rounded-full transition-colors"
           aria-label="More post options"
         >
-          <MoreHorizontal size={20} />
+          <MoreHorizontal size={18} />
         </button>
       </div>
 
@@ -158,7 +158,7 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onSharePost }) => {
         {showHeartPop && (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
             <Heart
-              size={90}
+              size={80}
               className="fill-white text-white drop-shadow-2xl animate-heart-pop"
             />
           </div>
@@ -166,8 +166,8 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onSharePost }) => {
       </div>
 
       {/* Action Bar (Like, Comment, Share, Bookmark) */}
-      <div className="px-3.5 pt-3 pb-1.5 flex items-center justify-between text-neutral-800 dark:text-neutral-200">
-        <div className="flex items-center gap-4">
+      <div className="px-3.5 pt-2 pb-1 flex items-center justify-between text-neutral-800 dark:text-neutral-200">
+        <div className="flex items-center gap-3.5">
           {/* Like Button */}
           <button
             onClick={handleToggleLike}
@@ -175,7 +175,7 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onSharePost }) => {
             aria-label={isLiked ? 'Unlike' : 'Like'}
           >
             <Heart
-              size={24}
+              size={21}
               className={`transition-colors duration-150 ${
                 isLiked
                   ? 'fill-red-500 text-red-500 scale-105'
@@ -187,13 +187,16 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onSharePost }) => {
           {/* Comment Button */}
           <button
             onClick={() => {
-              const inputEl = document.getElementById(`comment-input-${post.id}`);
-              inputEl?.focus();
+              setShowAllComments(true);
+              setTimeout(() => {
+                const inputEl = document.getElementById(`comment-input-${post.id}`);
+                inputEl?.focus();
+              }, 100);
             }}
             className="hover:opacity-70 transition-transform active:scale-110"
             aria-label="Comment"
           >
-            <MessageCircle size={24} className="hover:text-neutral-500 dark:hover:text-neutral-400" />
+            <MessageCircle size={21} className="hover:text-neutral-500 dark:hover:text-neutral-400" />
           </button>
 
           {/* Share / Direct Message Button */}
@@ -202,7 +205,7 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onSharePost }) => {
             className="hover:opacity-70 transition-transform active:scale-110"
             aria-label="Share"
           >
-            <InstagramDirectIcon size={23} strokeWidth={2} className="hover:text-neutral-500 dark:hover:text-neutral-400" />
+            <InstagramDirectIcon size={20} strokeWidth={2} className="hover:text-neutral-500 dark:hover:text-neutral-400" />
           </button>
         </div>
 
@@ -213,15 +216,15 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onSharePost }) => {
           aria-label={isSaved ? 'Remove from Saved' : 'Save'}
         >
           <Bookmark
-            size={24}
+            size={21}
             className={isSaved ? 'fill-neutral-900 dark:fill-white text-neutral-900 dark:text-white' : ''}
           />
         </button>
       </div>
 
       {/* Likes Count */}
-      <div className="px-3.5 py-1">
-        <p className="text-xs font-bold text-neutral-900 dark:text-white">
+      <div className="px-3.5 py-0.5">
+        <p className="text-[11px] font-bold text-neutral-900 dark:text-white">
           {likesCount === 0 ? (
             <button
               type="button"
@@ -239,16 +242,16 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onSharePost }) => {
       </div>
 
       {/* Caption & Hashtags */}
-      <div className="px-3.5 py-1 text-xs text-neutral-800 dark:text-neutral-200 leading-relaxed">
+      <div className="px-3.5 py-0.5 text-xs text-neutral-800 dark:text-neutral-200 leading-snug">
         <span className="font-bold mr-1.5 text-neutral-900 dark:text-white">
           {post.author.username}
         </span>
         <span className="whitespace-pre-line">
           {isCaptionExpanded
             ? post.caption
-            : post.caption.slice(0, 115) + (post.caption.length > 115 ? '...' : '')}
+            : post.caption.slice(0, 85) + (post.caption.length > 85 ? '...' : '')}
         </span>
-        {post.caption.length > 115 && (
+        {post.caption.length > 85 && (
           <button
             onClick={() => setIsCaptionExpanded(!isCaptionExpanded)}
             className="text-neutral-500 dark:text-neutral-400 text-xs font-normal ml-1 hover:underline"
@@ -258,93 +261,110 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onSharePost }) => {
         )}
 
         {/* Tags */}
-        <div className="flex flex-wrap gap-1 mt-1.5">
-          {post.tags.map((tag) => (
-            <span
-              key={tag}
-              className="text-[11px] font-medium text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
-            >
-              {tag}{' '}
-            </span>
-          ))}
-        </div>
+        {isCaptionExpanded && (
+          <div className="flex flex-wrap gap-1 mt-1.5">
+            {post.tags.map((tag) => (
+              <span
+                key={tag}
+                className="text-[11px] font-medium text-blue-600 dark:text-blue-400 hover:underline cursor-pointer"
+              >
+                {tag}{' '}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* Comments Section */}
-      <div className="px-3.5 py-1">
-        {!showAllComments && comments.length > 1 && (
+      {/* Comments & Timestamp Section */}
+      <div className="px-3.5 py-0.5">
+        {!showAllComments && comments.length > 0 && (
           <button
             onClick={() => setShowAllComments(true)}
-            className="text-[11px] text-neutral-500 dark:text-neutral-400 font-normal hover:underline block my-0.5"
+            className="text-[11px] text-neutral-500 dark:text-neutral-400 font-normal hover:underline block py-0.5"
           >
             View all {comments.length} comments
           </button>
         )}
 
-        {/* Comment list */}
-        <div className="space-y-1.5 mt-1">
-          {(showAllComments ? comments : comments.slice(0, 2)).map((c) => (
-            <div key={c.id} className="flex items-start justify-between text-xs group">
-              <div className="pr-4">
-                <span className="font-bold mr-1.5 text-neutral-900 dark:text-white">
-                  {c.username}
-                </span>
-                <span className="text-neutral-700 dark:text-neutral-300">{c.text}</span>
-                <span className="block text-[10px] text-neutral-400 mt-0.5 font-light">
-                  {c.timestamp}
-                </span>
-              </div>
+        {/* Expanded Comment List */}
+        {showAllComments && (
+          <div className="space-y-1.5 mt-1 border-t border-neutral-100 dark:border-neutral-900 pt-1.5">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-semibold text-neutral-400 uppercase tracking-wider">
+                Comments
+              </span>
               <button
-                onClick={() => handleToggleCommentLike(c.id)}
-                className="text-neutral-400 hover:text-red-500 pt-0.5 transition-colors"
-                aria-label="Like comment"
+                onClick={() => setShowAllComments(false)}
+                className="text-[10px] text-neutral-500 hover:underline"
               >
-                <Heart
-                  size={12}
-                  className={c.userLiked ? 'fill-red-500 text-red-500' : ''}
-                />
+                Hide
               </button>
             </div>
-          ))}
-        </div>
+            {comments.map((c) => (
+              <div key={c.id} className="flex items-start justify-between text-xs group">
+                <div className="pr-4">
+                  <span className="font-bold mr-1.5 text-neutral-900 dark:text-white">
+                    {c.username}
+                  </span>
+                  <span className="text-neutral-700 dark:text-neutral-300">{c.text}</span>
+                  <span className="block text-[10px] text-neutral-400 mt-0.5 font-light">
+                    {c.timestamp}
+                  </span>
+                </div>
+                <button
+                  onClick={() => handleToggleCommentLike(c.id)}
+                  className="text-neutral-400 hover:text-red-500 pt-0.5 transition-colors"
+                  aria-label="Like comment"
+                >
+                  <Heart
+                    size={12}
+                    className={c.userLiked ? 'fill-red-500 text-red-500' : ''}
+                  />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Timestamp */}
-        <div className="text-[10px] uppercase tracking-wider text-neutral-400 font-light mt-2 mb-1">
+        <div className="text-[10px] uppercase tracking-wider text-neutral-400 font-light mt-0.5 pb-1">
           {post.timestamp}
         </div>
       </div>
 
-      {/* Add Comment Input Form */}
-      <form
-        onSubmit={handleAddComment}
-        className="px-3.5 py-2.5 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center gap-2"
-      >
-        <button
-          type="button"
-          onClick={() => setNewComment((prev) => prev + ' 🚀')}
-          className="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 transition-colors"
-          aria-label="Add emoji"
+      {/* Add Comment Input Form (Visible when comments expanded or focused) */}
+      {showAllComments && (
+        <form
+          onSubmit={handleAddComment}
+          className="px-3.5 py-2 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center gap-2"
         >
-          <Smile size={18} />
-        </button>
+          <button
+            type="button"
+            onClick={() => setNewComment((prev) => prev + ' 🚀')}
+            className="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 transition-colors"
+            aria-label="Add emoji"
+          >
+            <Smile size={16} />
+          </button>
 
-        <input
-          id={`comment-input-${post.id}`}
-          type="text"
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
-          placeholder="Add a comment..."
-          className="flex-1 bg-transparent text-xs text-neutral-900 dark:text-white placeholder-neutral-400 focus:outline-none"
-        />
+          <input
+            id={`comment-input-${post.id}`}
+            type="text"
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            placeholder="Add a comment..."
+            className="flex-1 bg-transparent text-xs text-neutral-900 dark:text-white placeholder-neutral-400 focus:outline-none"
+          />
 
-        <button
-          type="submit"
-          disabled={!newComment.trim()}
-          className="text-xs font-bold text-blue-500 hover:text-blue-600 disabled:opacity-0 transition-opacity"
-        >
-          Post
-        </button>
-      </form>
+          <button
+            type="submit"
+            disabled={!newComment.trim()}
+            className="text-xs font-bold text-blue-500 hover:text-blue-600 disabled:opacity-0 transition-opacity"
+          >
+            Post
+          </button>
+        </form>
+      )}
     </article>
   );
 };

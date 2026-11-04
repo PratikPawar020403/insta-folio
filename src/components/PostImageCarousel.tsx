@@ -70,7 +70,7 @@ export const PostImageCarousel: React.FC<PostImageCarouselProps> = ({
 
   return (
     <div
-      className="relative w-full aspect-[4/5] bg-neutral-900 overflow-hidden select-none group"
+      className="relative w-full h-[280px] xs:h-[320px] sm:h-[370px] max-h-[44dvh] bg-neutral-950 overflow-hidden select-none group"
       onClick={handleTap}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
