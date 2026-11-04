@@ -97,12 +97,13 @@ describe('Supabase Formatting and Row Mapping', () => {
     expect(project.carouselSlides.length).toBeGreaterThanOrEqual(1);
   });
 
-  it('PROJECTS_DATA has at least 5 default featured projects', () => {
+  it('PROJECTS_DATA has at least 5 default featured projects with valid carouselSlides for feed rendering', () => {
     expect(PROJECTS_DATA.length).toBeGreaterThanOrEqual(5);
     for (const p of PROJECTS_DATA) {
       expect(p.id).toBeTruthy();
       expect(p.title).toBeTruthy();
       expect(p.skills.length).toBeGreaterThan(0);
+      expect(p.carouselSlides.length).toBeGreaterThanOrEqual(1);
     }
   });
 });

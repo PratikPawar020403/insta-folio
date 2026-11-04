@@ -73,7 +73,7 @@ export function App() {
       setPrevTab(activeTab);
     }
     setActiveTab(tab);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
   const handleOpenMessages = () => {
@@ -139,10 +139,10 @@ export function App() {
             </div>
           )}
 
-          {/* TAB 2: SEARCH (EXPLORE GRID OF PROJECTS) */}
+          {/* TAB 2: SEARCH (SEAMLESS PROJECT FEED & EXPLORE) */}
           {activeTab === 'search' && (
             <div className="animate-in fade-in duration-200">
-              <SearchExplore />
+              <SearchExplore onShare={handleOpenMessages} />
             </div>
           )}
 
