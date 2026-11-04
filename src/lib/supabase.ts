@@ -62,11 +62,15 @@ export function mapDatabaseRowToProject(row: Record<string, unknown>): ProjectIt
   const details = String(row.details || '').trim();
 
   // Tech stack skills array
-  const skills: string[] = Array.isArray(row.tech_stack)
+  let skills: string[] = Array.isArray(row.tech_stack)
     ? (row.tech_stack as string[])
     : typeof row.tech_stack === 'string'
     ? (row.tech_stack as string).split(',').map((s) => s.trim())
     : [];
+
+  if (skills.length === 0) {
+    skills = [category, 'Security Analysis', 'Research'];
+  }
 
   // Determine span: if size is 'large' or undefined, alternate nicely
   const span: 'tall' | 'normal' = row.size === 'large' ? 'tall' : 'normal';

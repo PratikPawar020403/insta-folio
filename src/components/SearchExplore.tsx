@@ -10,7 +10,7 @@ interface SearchExploreProps {
 }
 
 export const SearchExplore: React.FC<SearchExploreProps> = ({ onSelectProject, onShare }) => {
-  const { projects } = useProjects();
+  const { projects, loading } = useProjects();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategoryFilter, setSelectedCategoryFilter] = useState('All');
   const [activeProject, setActiveProject] = useState<ProjectItem | null>(null);
@@ -22,11 +22,11 @@ export const SearchExplore: React.FC<SearchExploreProps> = ({ onSelectProject, o
   const startXRef = useRef(0);
   const scrollLeftRef = useRef(0);
 
-  // Extract unique categories dynamically from actual projects
+  // Extract unique categories dynamically from actual verified projects
   const categories = useMemo(() => {
     const cats = new Set<string>();
     projects.forEach((p) => {
-      if (p.category) cats.add(p.category);
+      if (p.category) cats.add(p.category.trim());
     });
     return ['All', ...Array.from(cats)];
   }, [projects]);
@@ -45,7 +45,7 @@ export const SearchExplore: React.FC<SearchExploreProps> = ({ onSelectProject, o
 
       const matchesCategory =
         selectedCategoryFilter === 'All' ||
-        project.category.toLowerCase() === selectedCategoryFilter.toLowerCase();
+        project.category.trim().toLowerCase() === selectedCategoryFilter.trim().toLowerCase();
 
       return matchesSearch && matchesCategory;
     });
@@ -127,7 +127,7 @@ export const SearchExplore: React.FC<SearchExploreProps> = ({ onSelectProject, o
     <div className="w-full bg-neutral-50 dark:bg-black min-h-screen pb-16 transition-colors">
       {/* Top Search Bar & Category Navigation (Sticky) */}
       <div className="sticky top-14 z-30 bg-neutral-50/95 dark:bg-black/95 backdrop-blur-md px-3 pt-2.5 pb-2 border-b border-neutral-200 dark:border-neutral-900 transition-colors">
-        {/* Search Bar Input (Full width, no feed toggle) */}
+        {/* Search Bar Input */}
         <div className="relative w-full mb-2.5">
           <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none">
             <Search size={15} />
@@ -136,8 +136,9 @@ export const SearchExplore: React.FC<SearchExploreProps> = ({ onSelectProject, o
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            disabled={loading}
             placeholder="Search projects, stack, categories..."
-            className="w-full bg-neutral-200/70 dark:bg-neutral-900 text-neutral-900 dark:text-white placeholder-neutral-500 text-xs rounded-xl py-2 pl-9 pr-9 border border-neutral-300/60 dark:border-neutral-800 focus:border-neutral-500 focus:outline-none transition-all"
+            className="w-full bg-neutral-200/70 dark:bg-neutral-900 text-neutral-900 dark:text-white placeholder-neutral-500 text-xs rounded-xl py-2 pl-9 pr-9 border border-neutral-300/60 dark:border-neutral-800 focus:border-neutral-500 focus:outline-none transition-all disabled:opacity-75"
           />
           {searchQuery && (
             <button
@@ -152,37 +153,62 @@ export const SearchExplore: React.FC<SearchExploreProps> = ({ onSelectProject, o
 
         {/* Draggable Category Domains Filter Bar */}
         <div className="relative w-full">
-          <div
-            ref={categoryContainerRef}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUpOrLeave}
-            onMouseLeave={handleMouseUpOrLeave}
-            className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 pr-4 cursor-grab active:cursor-grabbing select-none scroll-smooth touch-pan-x"
-          >
-            {categories.map((cat) => {
-              const isSelected = selectedCategoryFilter === cat;
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategoryFilter(cat)}
-                  className={`text-[11px] font-semibold px-3 py-1.5 rounded-lg whitespace-nowrap transition-all flex-shrink-0 ${
-                    isSelected
-                      ? 'bg-neutral-900 text-white dark:bg-white dark:text-black shadow-sm font-bold'
-                      : 'bg-neutral-200/60 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-800 border border-neutral-300/40 dark:border-neutral-800/80 hover:text-neutral-900 dark:hover:text-white'
-                  }`}
-                >
-                  {cat}
-                </button>
-              );
-            })}
-          </div>
+          {loading ? (
+            /* Subtle Instagram Skeleton Placeholder for Category Pills */
+            <div className="flex items-center gap-1.5 overflow-hidden py-1 pr-4">
+              {[58, 86, 110, 78, 92].map((width, i) => (
+                <div
+                  key={i}
+                  style={{ width: `${width}px` }}
+                  className="h-7 rounded-lg bg-neutral-200/70 dark:bg-neutral-800/80 animate-pulse flex-shrink-0"
+                />
+              ))}
+            </div>
+          ) : (
+            <div
+              ref={categoryContainerRef}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUpOrLeave}
+              onMouseLeave={handleMouseUpOrLeave}
+              className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 pr-4 cursor-grab active:cursor-grabbing select-none scroll-smooth touch-pan-x"
+            >
+              {categories.map((cat) => {
+                const isSelected = selectedCategoryFilter === cat;
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setSelectedCategoryFilter(cat)}
+                    className={`text-[11px] font-semibold px-3 py-1.5 rounded-lg whitespace-nowrap transition-all flex-shrink-0 ${
+                      isSelected
+                        ? 'bg-neutral-900 text-white dark:bg-white dark:text-black shadow-sm font-bold'
+                        : 'bg-neutral-200/60 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-800 border border-neutral-300/40 dark:border-neutral-800/80 hover:text-neutral-900 dark:hover:text-white'
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Explore Grid of Posts */}
-      {filteredProjects.length === 0 ? (
-        <div className="text-center py-20 px-4">
+      {/* Main Content: Blank Subtle Instagram Skeleton vs. Actual Project Grid */}
+      {loading ? (
+        /* Clean Instagram-Inspired Empty Placeholder Skeleton Grid (3:4 ratio, zero stale/demo content) */
+        <div className="grid grid-cols-3 gap-[2px] bg-neutral-200/60 dark:bg-neutral-950">
+          {Array.from({ length: 9 }).map((_, idx) => (
+            <div
+              key={idx}
+              className="relative aspect-[3/4] overflow-hidden bg-neutral-200/80 dark:bg-neutral-900 animate-pulse select-none"
+            >
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-300/40 dark:from-neutral-800/50 to-transparent" />
+            </div>
+          ))}
+        </div>
+      ) : filteredProjects.length === 0 ? (
+        <div className="text-center py-20 px-4 animate-in fade-in duration-200">
           <div className="w-12 h-12 rounded-full bg-neutral-200 dark:bg-neutral-900 flex items-center justify-center mx-auto text-xl mb-3 border border-neutral-300 dark:border-neutral-800">
             🔍
           </div>
@@ -200,7 +226,7 @@ export const SearchExplore: React.FC<SearchExploreProps> = ({ onSelectProject, o
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-3 gap-[2px] bg-neutral-200 dark:bg-black">
+        <div className="grid grid-cols-3 gap-[2px] bg-neutral-200 dark:bg-black animate-in fade-in duration-300">
           {filteredProjects.map((project) => {
             return (
               <div
