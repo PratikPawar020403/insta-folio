@@ -1,4 +1,4 @@
-# instafolio 📸✨
+# Instafolio 📸✨
 > **A high-craft developer portfolio web application built with the authentic UX, interaction physics, and design language of Instagram.**
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
@@ -12,57 +12,25 @@
 
 ## 🌟 Overview
 
-**instafolio** re-imagines the traditional developer portfolio as an authentic mobile-first Instagram web application. It combines interactive feed posts, high-framerate multi-slide carousels, full-screen segmented education stories with board exam marks, a searchable project explore grid with Supabase integration, an Instagram Direct Messages contact center, and an interactive voice-activated intro screen (*"Khul Ja Sim Sim"*).
+**Instafolio** re-imagines the traditional developer portfolio as an authentic mobile-first Instagram web application. It combines interactive feed posts, high-framerate multi-slide carousels, full-screen segmented education stories with board exam marks, a searchable project explore grid with Supabase integration, an Instagram Direct Messages contact center, and an interactive voice-activated intro screen (*"Khul Ja Sim Sim"*).
 
-Built by **Pratik S Pawar** ([@pratik_pawar_0204](https://instagram.com/pratik_pawar_0204)).
+Built by **Pratik S Pawar**.
 
 ---
 
 ## 🚀 Key Features
 
 ### 1. 🎙️ Voice & Interactive Intro (*"Khul Ja Sim Sim"*)
-- **Web Speech API Recognition**: Listens for the phrase *"Khul Ja Sim Sim"* with phonetic fallback parsing, Levenshtein distance tolerance, and Hindi/English linguistic roots.
-- **Microphone State Management**: Visual pulsing audio indicator with non-blocking graceful fallback to tap-to-open.
-- **Reel / Story Swipe-Up Transition**: Authentic spring flick upward (`translateY(-100%)`) with full reduced-motion accessibility support.
-- **Replay Capability**: Tap the `instafolio` header wordmark at any time to replay the opening experience.
 
 ### 2. 🎓 Education Journey Story Bar & Viewer
-- **Milestones**: School (1st – 10th SSC) → Junior College (11th & 12th HSC) → BSc Computer Science → MSc Information Technology.
-- **12 Curated Slides**: High-resolution photo memory collages paired with detailed academic retrospectives.
-- **Board & University Scores**: Displays SSC (80.80%), HSC (51.38%), BSc CS (CGPA 7.75), and MSc IT (CGPA 7.58) subject grades.
-- **Interaction Physics**:
-  - Segmented progress bars with `requestAnimationFrame` timing.
-  - Left 35% tap to rewind, right 65% tap to advance.
-  - **Press & Hold**: Pauses progress instantly; releasing resumes timing.
-  - Keyboard shortcuts (`←`, `→`, `Space` for pause/play, `Escape` to close).
-  - Quick emoji reactions with particle confetti and direct reply form.
-  - Gradient rings indicate unviewed stories; turns muted grey once viewed.
 
 ### 3. 📱 Authentically Styled Feed Posts
-- **Post 1: Academic & Life Collage Carousel** (`1-1.jpg`, `1-2.jpeg`, `1-3.jpg` with touch swipe, dot indicators, and chevron navigation).
-- **Post 2: Ruia College MSc IT & Campus Memories** (`2-1.jpg`, `2-2.jpg`, `2-3.jpg` high-res photo gallery).
-- **Post 3: Wispr Flow Engineering & Product Pitch** (*"Bolega India, tabhi toh aage badhega India"* - voice-first accessibility and Indian multilingual ergonomics).
-- **Post 4: Open to Work & Opportunity Roles** (Full-Stack Engineer, Frontend/UI-UX, Backend & APIs, Freelance MVPs with 1-click email copy & confetti).
-- **Social Feed Interactions**:
-  - Double-tap anywhere on cards to trigger an animated floating heart ❤️.
-  - Live local state persistence for Likes, Bookmarks, and Comments synced via custom browser events.
-  - Expandable multi-line captions and clickable hashtags.
 
 ### 4. 🔍 Search & Explore Grid
-- Instagram Explore-style dynamic staggered grid with tall and square tile spans.
-- Real-time search query filtering by project title, skill keywords, or categories.
-- Horizontally scrollable category pills (*Machine Learning, Cybersecurity, Web Development, Full-Stack*).
-- Full project detail modal with architecture deep-dive slides, live demo links, and GitHub repository shortcuts.
 
 ### 5. 💬 Instagram Direct Messages (DM Inbox)
-- Full-page Direct Message screen modeled after Instagram's official messaging interface.
-- 1-click quick inquiry chips (*"👋 Hi Pratik, open for a chat?"*, *"💼 We have an open role for you"*).
-- Direct deep links for WhatsApp (`+91-8928260115`), Gmail (`pratikpawar0222@gmail.com`), LinkedIn, GitHub, and external portfolio.
 
 ### 6. 👤 Profile Tab
-- Authentic profile header displaying `@pratik_pawar_0204`, verified badge, posts count, follower metrics, and bio.
-- Quick story highlights shortcuts.
-- Tab switcher for Project Grid view and Saved/Bookmarked posts.
 
 ---
 
@@ -192,14 +160,6 @@ dist/
 ## 👤 Author
 
 **Pratik S Pawar**
-- **Instagram**: [@pratik_pawar_0204](https://instagram.com/pratik_pawar_0204)
-- **LinkedIn**: [pratik-s-pawar](https://www.linkedin.com/in/pratik-s-pawar-780443358/)
-- **GitHub**: [@PratikPawar020403](https://github.com/PratikPawar020403)
-- **Portfolio**: [psp-02-portfolio.netlify.app](https://psp-02-portfolio.netlify.app/)
-- **Email**: pratikpawar0222@gmail.com
-- **Phone / WhatsApp**: +91-8928260115
-
----
 
 ## 📄 License
 
