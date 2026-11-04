@@ -165,26 +165,31 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onSharePost }) => {
         )}
       </div>
 
-      {/* Action Bar (Like, Comment, Share, Bookmark) */}
-      <div className="px-3.5 pt-2 pb-1 flex items-center justify-between text-neutral-800 dark:text-neutral-200">
-        <div className="flex items-center gap-3.5">
-          {/* Like Button */}
+      {/* Action Bar (Like, Comment, Share, Bookmark with inline counts matching Instagram) */}
+      <div className="px-3.5 pt-2 pb-1.5 flex items-center justify-between text-neutral-800 dark:text-neutral-200">
+        <div className="flex items-center gap-4">
+          {/* Like Button with Count */}
           <button
             onClick={handleToggleLike}
-            className="hover:opacity-70 transition-transform active:scale-125"
+            className="flex items-center gap-1.5 hover:opacity-70 transition-transform active:scale-110"
             aria-label={isLiked ? 'Unlike' : 'Like'}
           >
             <Heart
-              size={21}
+              size={22}
               className={`transition-colors duration-150 ${
                 isLiked
                   ? 'fill-red-500 text-red-500 scale-105'
                   : 'hover:text-neutral-500 dark:hover:text-neutral-400'
               }`}
             />
+            {likesCount > 0 && (
+              <span className={`text-xs font-semibold ${isLiked ? 'text-red-500' : 'text-neutral-800 dark:text-neutral-200'}`}>
+                {likesCount.toLocaleString()}
+              </span>
+            )}
           </button>
 
-          {/* Comment Button */}
+          {/* Comment Button with Count */}
           <button
             onClick={() => {
               setShowAllComments(true);
@@ -193,10 +198,15 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onSharePost }) => {
                 inputEl?.focus();
               }, 100);
             }}
-            className="hover:opacity-70 transition-transform active:scale-110"
+            className="flex items-center gap-1.5 hover:opacity-70 transition-transform active:scale-110"
             aria-label="Comment"
           >
-            <MessageCircle size={21} className="hover:text-neutral-500 dark:hover:text-neutral-400" />
+            <MessageCircle size={22} className="hover:text-neutral-500 dark:hover:text-neutral-400" />
+            {comments.length > 0 && (
+              <span className="text-xs font-semibold text-neutral-800 dark:text-neutral-200">
+                {comments.length}
+              </span>
+            )}
           </button>
 
           {/* Share / Direct Message Button */}
@@ -205,7 +215,7 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onSharePost }) => {
             className="hover:opacity-70 transition-transform active:scale-110"
             aria-label="Share"
           >
-            <InstagramDirectIcon size={20} strokeWidth={2} className="hover:text-neutral-500 dark:hover:text-neutral-400" />
+            <InstagramDirectIcon size={21} strokeWidth={2} className="hover:text-neutral-500 dark:hover:text-neutral-400" />
           </button>
         </div>
 
@@ -216,30 +226,24 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onSharePost }) => {
           aria-label={isSaved ? 'Remove from Saved' : 'Save'}
         >
           <Bookmark
-            size={21}
+            size={22}
             className={isSaved ? 'fill-neutral-900 dark:fill-white text-neutral-900 dark:text-white' : ''}
           />
         </button>
       </div>
 
-      {/* Likes Count */}
-      <div className="px-3.5 py-0.5">
-        <p className="text-[11px] font-bold text-neutral-900 dark:text-white">
-          {likesCount === 0 ? (
-            <button
-              type="button"
-              onClick={handleToggleLike}
-              className="font-normal text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors"
-            >
-              Be the first to <span className="font-semibold text-neutral-800 dark:text-neutral-200 underline underline-offset-2">like this</span>
-            </button>
-          ) : likesCount === 1 ? (
-            '1 like'
-          ) : (
-            `${likesCount.toLocaleString()} likes`
-          )}
-        </p>
-      </div>
+      {/* Likes prompt when 0 likes */}
+      {likesCount === 0 && (
+        <div className="px-3.5 py-0.5">
+          <button
+            type="button"
+            onClick={handleToggleLike}
+            className="text-[11px] font-normal text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors"
+          >
+            Be the first to <span className="font-semibold text-neutral-800 dark:text-neutral-200 underline underline-offset-2">like this</span>
+          </button>
+        </div>
+      )}
 
       {/* Caption & Hashtags */}
       <div className="px-3.5 py-0.5 text-xs text-neutral-800 dark:text-neutral-200 leading-snug">

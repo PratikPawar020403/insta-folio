@@ -227,7 +227,7 @@ export const AboutMeCarousel: React.FC<AboutMeCarouselProps> = ({ onDoubleTap })
   };
 
   return (
-    <div className="relative w-full h-[280px] xs:h-[320px] sm:h-[370px] max-h-[44dvh] bg-neutral-100 dark:bg-neutral-900 overflow-hidden select-none group">
+    <div className="relative w-full aspect-[4/5] max-h-[60dvh] bg-neutral-100 dark:bg-neutral-900 overflow-hidden select-none group">
       {/* Slide Counter Badge (Top Right, Instagram Style) */}
       <div className="absolute top-3 right-3 z-20 px-2.5 py-1 rounded-full bg-black/65 backdrop-blur-md text-white text-[11px] font-semibold shadow-md pointer-events-none">
         {currentSlide + 1}/{totalSlides}
