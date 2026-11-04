@@ -203,7 +203,7 @@ export const ProjectPostCard: React.FC<ProjectPostCardProps> = ({ project, onSha
 
       {/* 2. Interactive Multi-Slide Carousel Container */}
       <div
-        className="relative w-full aspect-[4/5] max-h-[60dvh] bg-neutral-950 overflow-hidden select-none sm:rounded-xl border-y sm:border border-neutral-200 dark:border-neutral-800"
+        className="relative w-full h-[270px] xs:h-[310px] sm:h-[370px] max-h-[44dvh] bg-neutral-950 overflow-hidden select-none sm:rounded-xl border-y sm:border border-neutral-200 dark:border-neutral-800"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -350,23 +350,20 @@ export const ProjectPostCard: React.FC<ProjectPostCardProps> = ({ project, onSha
         )}
       </div>
 
-      {/* 3. Social Interaction Bar with inline counts matching Instagram */}
-      <div className="px-3.5 pt-2 pb-1.5 flex items-center justify-between text-neutral-800 dark:text-neutral-200">
-        <div className="flex items-center gap-4">
+      {/* 3. Social Interaction Bar */}
+      <div className="px-3.5 pt-2 pb-1 flex items-center justify-between text-neutral-800 dark:text-neutral-200">
+        <div className="flex items-center gap-3.5">
           <button
             onClick={handleToggleLike}
-            className="flex items-center gap-1.5 hover:opacity-75 transition-transform active:scale-110"
+            className="hover:opacity-75 transition-transform active:scale-125"
             aria-label={isLiked ? 'Unlike' : 'Like'}
           >
             <Heart
-              size={22}
+              size={21}
               className={`transition-colors ${
                 isLiked ? 'fill-red-500 text-red-500' : 'hover:text-neutral-500'
               }`}
             />
-            <span className={`text-xs font-semibold ${isLiked ? 'text-red-500' : 'text-neutral-800 dark:text-neutral-200'}`}>
-              {(project.likesCount + (isLiked ? 1 : 0)).toLocaleString()}
-            </span>
           </button>
           <button
             onClick={() => {
@@ -376,22 +373,17 @@ export const ProjectPostCard: React.FC<ProjectPostCardProps> = ({ project, onSha
                 el?.focus();
               }, 100);
             }}
-            className="flex items-center gap-1.5 hover:opacity-75 transition-transform active:scale-110"
+            className="hover:opacity-75 transition-transform active:scale-110"
             aria-label="Comment"
           >
-            <MessageCircle size={22} />
-            {comments.length > 0 && (
-              <span className="text-xs font-semibold text-neutral-800 dark:text-neutral-200">
-                {comments.length}
-              </span>
-            )}
+            <MessageCircle size={21} />
           </button>
           <button
             onClick={onShare}
             className="hover:opacity-75 transition-transform active:scale-110"
             aria-label="Share"
           >
-            <InstagramDirectIcon size={21} strokeWidth={2} />
+            <InstagramDirectIcon size={20} strokeWidth={2} />
           </button>
         </div>
 

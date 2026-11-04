@@ -70,7 +70,7 @@ export const PostImageCarousel: React.FC<PostImageCarouselProps> = ({
 
   return (
     <div
-      className="relative w-full aspect-[4/5] max-h-[60dvh] bg-neutral-950 overflow-hidden select-none group"
+      className="relative w-full h-[280px] xs:h-[320px] sm:h-[370px] max-h-[44dvh] bg-neutral-950 overflow-hidden select-none group"
       onClick={handleTap}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
@@ -89,7 +89,7 @@ export const PostImageCarousel: React.FC<PostImageCarouselProps> = ({
             <img
               src={imgSrc}
               alt={`Slide ${idx + 1}`}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
               loading={idx === 0 ? 'eager' : 'lazy'}
               draggable={false}
             />

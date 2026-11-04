@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Volume2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface WisprPitchCarouselProps {
   pitchId: 'wispr-breathless' | 'wispr-diwali';
@@ -733,15 +733,10 @@ export const WisprPitchCarousel: React.FC<WisprPitchCarouselProps> = ({
   };
 
   return (
-    <div className="relative w-full aspect-[4/5] max-h-[60dvh] overflow-hidden select-none group">
+    <div className="relative w-full h-[280px] xs:h-[320px] sm:h-[370px] max-h-[44dvh] overflow-hidden select-none group">
       {/* 1/6 Slide Counter Badge (Top Right, Instagram Style) */}
       <div className="absolute top-3 right-3 z-20 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-[11px] font-semibold shadow-md pointer-events-none">
         {currentSlide + 1}/{totalSlides}
-      </div>
-
-      {/* Audio Indicator (Bottom Right, matching Instagram Reels) */}
-      <div className="absolute bottom-3 right-3 z-20 w-7 h-7 rounded-full bg-black/60 backdrop-blur-md text-white flex items-center justify-center shadow-md pointer-events-none">
-        <Volume2 size={13} className="text-white/90" />
       </div>
 
       {/* Swipeable Slides Track */}

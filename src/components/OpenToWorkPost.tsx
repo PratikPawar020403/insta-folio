@@ -75,7 +75,7 @@ export const OpenToWorkPost: React.FC<OpenToWorkPostProps> = ({ onDoubleTap }) =
   return (
     <div
       onClick={handleTap}
-      className="relative w-full aspect-[4/5] max-h-[60dvh] bg-gradient-to-br from-neutral-900 via-neutral-950 to-neutral-900 text-white p-5 md:p-6 flex flex-col justify-between overflow-hidden select-none border border-neutral-800"
+      className="relative w-full h-[280px] xs:h-[320px] sm:h-[370px] max-h-[44dvh] bg-gradient-to-br from-neutral-900 via-neutral-950 to-neutral-900 text-white p-4 sm:p-5 flex flex-col justify-between overflow-hidden select-none border border-neutral-800"
     >
       {/* Decorative background glow accents */}
       <div className="absolute -top-16 -right-16 w-48 h-48 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
