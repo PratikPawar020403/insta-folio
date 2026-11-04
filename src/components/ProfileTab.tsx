@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { USER_PROFILE, INITIAL_STORIES } from '../data/portfolioData';
-import type { ProjectItem } from '../types';
-import { useProjects } from '../hooks/useProjects';
+import { USER_PROFILE, INITIAL_STORIES, INITIAL_POSTS } from '../data/portfolioData';
+import type { Post } from '../types';
 import {
   CheckCircle2,
   Grid,
@@ -10,8 +9,12 @@ import {
   Mail,
   GraduationCap,
   Layers,
+  ChevronLeft,
+  Heart,
+  MessageCircle,
+  Sparkles,
 } from 'lucide-react';
-import { ProjectDetailPage } from './ProjectDetailPage';
+import { PostCard } from './PostCard';
 
 interface ProfileTabProps {
   onOpenStory: (index: number) => void;
@@ -22,16 +25,46 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
   onOpenStory,
   onOpenContact,
 }) => {
-  const { projects } = useProjects();
   const [activeSubTab, setActiveSubTab] = useState<'grid' | 'saved'>('grid');
-  const [activeProject, setActiveProject] = useState<ProjectItem | null>(null);
+  // Selected post for full-view modal/detail view
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
-  if (activeProject) {
+  // Exactly post 3 and post 4 from the home feed
+  const profilePosts: Post[] = [INITIAL_POSTS[2], INITIAL_POSTS[3]];
+
+  // If a post is tapped in the grid, render its full interactive card
+  if (selectedPost) {
     return (
-      <ProjectDetailPage
-        project={activeProject}
-        onBack={() => setActiveProject(null)}
-      />
+      <div className="w-full bg-white dark:bg-black min-h-screen pb-16">
+        {/* Sticky Header with Back Button */}
+        <div className="sticky top-14 z-30 bg-white/95 dark:bg-black/95 backdrop-blur-md px-3 py-2.5 border-b border-neutral-200 dark:border-neutral-800 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setSelectedPost(null)}
+              className="p-1.5 -ml-1 rounded-full text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+              aria-label="Back to profile grid"
+            >
+              <ChevronLeft size={22} />
+            </button>
+            <div>
+              <span className="text-[10px] text-neutral-400 uppercase font-semibold tracking-wider block leading-none">
+                Post
+              </span>
+              <h3 className="text-xs font-bold text-neutral-900 dark:text-white leading-tight">
+                {selectedPost.author.username}
+              </h3>
+            </div>
+          </div>
+        </div>
+
+        {/* Full Interactive Post Card */}
+        <div className="max-w-xl mx-auto pt-2">
+          <PostCard
+            post={selectedPost}
+            onSharePost={onOpenContact}
+          />
+        </div>
+      </div>
     );
   }
 
@@ -66,11 +99,11 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
             </span>
           </div>
 
-          {/* Stats: Posts, Followers, Following */}
+          {/* Stats: Posts (2), Followers, Following */}
           <div className="flex-1 flex items-center justify-around text-center">
             <div>
               <p className="font-bold text-sm sm:text-base text-neutral-900 dark:text-white">
-                {projects.length + 2}
+                {profilePosts.length}
               </p>
               <p className="text-[11px] text-neutral-500 dark:text-neutral-400">Posts</p>
             </div>
@@ -211,29 +244,110 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
         </button>
       </div>
 
-      {/* Projects Grid */}
-      <div className="grid grid-cols-3 gap-0.5 sm:gap-1">
-        {projects.map((project) => (
-          <div
-            key={project.id}
-            onClick={() => setActiveProject(project)}
-            className={`relative aspect-square cursor-pointer overflow-hidden group bg-gradient-to-br ${project.thumbnailGradient}`}
-          >
-            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors" />
+      {/* Profile Content */}
+      {activeSubTab === 'grid' ? (
+        /* Only Show Post 3 and Post 4 from Home Feed */
+        <div className="grid grid-cols-3 gap-0.5 sm:gap-1">
+          {profilePosts.map((post, index) => {
+            // Post 3 is index 0 in profilePosts: Wispr Breathless (#0B3D3A & #FF6B4A)
+            // Post 4 is index 1 in profilePosts: Wispr Diwali (#3B0F6B & #FF7AB6)
+            const isBreathless = post.id === 'post-wispr-breathless';
 
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-center text-white">
-              <span className="text-xl sm:text-2xl mb-1">{project.thumbnailIcon}</span>
-              <p className="text-[10px] sm:text-xs font-bold leading-tight line-clamp-2">
-                {project.title}
-              </p>
-            </div>
+            return (
+              <div
+                key={post.id}
+                onClick={() => setSelectedPost(post)}
+                className={`relative aspect-square cursor-pointer overflow-hidden group select-none flex flex-col justify-between p-2.5 sm:p-3 text-white transition-all active:scale-[0.98] ${
+                  isBreathless
+                    ? 'bg-[#0B3D3A] hover:bg-[#0e4844]'
+                    : 'bg-[#3B0F6B] hover:bg-[#4a1386]'
+                }`}
+              >
+                {/* Top Badge & Carousel Icon */}
+                <div className="flex items-center justify-between w-full">
+                  <span
+                    className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded border ${
+                      isBreathless
+                        ? 'text-[#FF6B4A] border-[#FF6B4A]/40 bg-[#FF6B4A]/10'
+                        : 'text-[#FF7AB6] border-[#FF7AB6]/40 bg-[#FF7AB6]/10'
+                    }`}
+                  >
+                    Wispr Flow
+                  </span>
+                  <div className="p-0.5 rounded bg-black/40 text-white">
+                    <Layers size={11} />
+                  </div>
+                </div>
 
-            <div className="absolute top-1.5 right-1.5 p-0.5 rounded bg-black/60 text-white">
-              <Layers size={10} />
-            </div>
+                {/* Center Content */}
+                <div className="my-auto py-1 text-center">
+                  {isBreathless ? (
+                    <>
+                      <div className="flex items-center justify-center gap-0.5 h-4 mb-1">
+                        {[40, 70, 100, 60, 90, 50, 80].map((h, i) => (
+                          <span
+                            key={i}
+                            className="w-0.5 sm:w-1 bg-[#FF6B4A] rounded-full"
+                            style={{ height: `${h}%` }}
+                          />
+                        ))}
+                      </div>
+                      <h4 className="text-[11px] sm:text-xs font-black leading-tight line-clamp-2">
+                        Bolega India
+                      </h4>
+                      <p className="text-[9px] text-neutral-300 line-clamp-1 mt-0.5">
+                        tabhi toh aage badhega India
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex items-center justify-center mb-1 text-[#FF7AB6]">
+                        <Sparkles size={14} />
+                      </div>
+                      <h4 className="text-[11px] sm:text-xs font-black leading-tight line-clamp-2">
+                        Diwali With Flow
+                      </h4>
+                      <p className="text-[9px] text-neutral-300 line-clamp-1 mt-0.5">
+                        Forward nahi, feel bhejo
+                      </p>
+                    </>
+                  )}
+                </div>
+
+                {/* Bottom Tag */}
+                <div className="text-[9px] text-neutral-300 font-medium truncate">
+                  Post {index + 3} • {isBreathless ? 'Shankar Mahadevan' : 'Darshan Magdum'}
+                </div>
+
+                {/* Instagram Hover Overlay */}
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-4 text-white z-20 pointer-events-none">
+                  <div className="flex items-center gap-1 font-bold text-xs">
+                    <Heart size={16} className="fill-white" />
+                    <span>{post.likesCount || 0}</span>
+                  </div>
+                  <div className="flex items-center gap-1 font-bold text-xs">
+                    <MessageCircle size={16} className="fill-white" />
+                    <span>{post.comments.length}</span>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        /* Saved Sub-Tab Empty State */
+        <div className="py-14 px-4 text-center">
+          <div className="w-12 h-12 rounded-full border-2 border-neutral-300 dark:border-neutral-700 flex items-center justify-center mx-auto mb-3 text-neutral-400">
+            <Bookmark size={22} />
           </div>
-        ))}
-      </div>
+          <h4 className="font-bold text-sm text-neutral-800 dark:text-neutral-200">
+            Save posts
+          </h4>
+          <p className="text-xs text-neutral-500 max-w-xs mx-auto mt-1">
+            Save posts from the feed to view them quickly in your saved collection.
+          </p>
+        </div>
+      )}
     </div>
   );
 };

@@ -11,7 +11,7 @@ export const USER_PROFILE = {
   github: 'https://github.com/PratikPawar020403',
   linkedin: 'https://www.linkedin.com/in/pratik-s-pawar-780443358/',
   portfolioUrl: 'https://psp-02-portfolio.netlify.app/',
-  postsCount: 4,
+  postsCount: 2,
   followersCount: '1.4k',
   followingCount: 382,
   isVerified: true,

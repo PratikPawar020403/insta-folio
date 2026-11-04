@@ -16,6 +16,7 @@ describe('USER_PROFILE Data Integrity', () => {
     expect(USER_PROFILE.github).toContain('PratikPawar020403');
     expect(USER_PROFILE.linkedin).toContain('pratik-s-pawar');
     expect(USER_PROFILE.portfolioUrl).toContain('psp-02-portfolio.netlify.app');
+    expect(USER_PROFILE.postsCount).toBe(2);
   });
 });
 
