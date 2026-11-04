@@ -4,7 +4,7 @@ export const USER_PROFILE = {
   username: 'pratik_pawar_0204',
   fullName: 'Pratik S Pawar',
   title: 'MSc IT Graduate & AI Builder',
-  avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+  avatar: '/profile.png',
   bio: '🎓 MSc IT Graduate • 💻 Full-Stack & AI Builder • ⚡ Building responsive & secure web products\n📍 Mumbai, India • 🌐 Open for opportunities',
   phone: '+91-8928260115',
   email: 'pratikpawar0222@gmail.com',
@@ -401,7 +401,7 @@ export const INITIAL_POSTS: Post[] = [
     author: {
       username: 'pratik_pawar_0204',
       name: 'Pratik S Pawar',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+      avatar: '/profile.png',
       isVerified: true,
       location: 'Creative Mind • Personal Introduction',
     },
@@ -444,7 +444,7 @@ Drop a heart or comment if you believe in curious minds building the future! �
     author: {
       username: 'pratik_pawar_0204',
       name: 'Pratik S Pawar',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+      avatar: '/profile.png',
       isVerified: true,
       location: 'The Curiosity Lab • Field Notes / 001',
     },
@@ -487,7 +487,7 @@ Swipe through 👉
     author: {
       username: 'pratik_pawar_0204',
       name: 'Pratik',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+      avatar: '/profile.png',
       isVerified: true,
       location: 'Growth Pitch • Wispr Flow India',
     },
@@ -522,7 +522,7 @@ Swipe through 👉
     author: {
       username: 'pratik_pawar_0204',
       name: 'Pratik',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+      avatar: '/profile.png',
       isVerified: true,
       location: 'Growth Pitch • Wispr Flow India',
     },

@@ -10,6 +10,7 @@ describe('USER_PROFILE Data Integrity', () => {
 
   it('has verified status and valid contact channels', () => {
     expect(USER_PROFILE.isVerified).toBe(true);
+    expect(USER_PROFILE.avatar).toBe('/profile.png');
     expect(USER_PROFILE.email).toBe('pratikpawar0222@gmail.com');
     expect(USER_PROFILE.phone).toBe('+91-8928260115');
     expect(USER_PROFILE.github).toContain('PratikPawar020403');
