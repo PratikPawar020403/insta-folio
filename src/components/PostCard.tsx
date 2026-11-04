@@ -100,7 +100,7 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onSharePost }) => {
   };
 
   return (
-    <article className="w-full bg-white dark:bg-black border-y sm:border sm:rounded-xl border-neutral-200 dark:border-neutral-800 transition-colors duration-200 overflow-hidden mb-3 sm:mb-4">
+    <article className="w-full max-w-[470px] mx-auto bg-white dark:bg-black border-y sm:border sm:rounded-xl border-neutral-200 dark:border-neutral-800 transition-colors duration-200 overflow-hidden mb-3 sm:mb-4">
       {/* Post Header */}
       <div className="px-3.5 py-2 flex items-center justify-between">
         <div className="flex items-center gap-2.5">

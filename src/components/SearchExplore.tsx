@@ -200,17 +200,13 @@ export const SearchExplore: React.FC<SearchExploreProps> = ({ onSelectProject, o
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-3 auto-rows-[135px] sm:auto-rows-[165px] gap-[2px] bg-neutral-200 dark:bg-black [grid-auto-flow:dense]">
-          {filteredProjects.map((project, index) => {
-            const isBig = project.span === 'tall' || index % 5 === 0;
-
+        <div className="grid grid-cols-3 gap-[2px] bg-neutral-200 dark:bg-black">
+          {filteredProjects.map((project) => {
             return (
               <div
                 key={project.id}
                 onClick={() => handleTileClick(project)}
-                className={`group relative overflow-hidden cursor-pointer bg-neutral-100 dark:bg-neutral-950 select-none ${
-                  isBig ? 'row-span-2' : 'row-span-1'
-                }`}
+                className="group relative aspect-[3/4] overflow-hidden cursor-pointer bg-neutral-100 dark:bg-neutral-950 select-none"
               >
                 {/* Full-bleed Project Image / Gradient */}
                 {project.imageUrl ? (

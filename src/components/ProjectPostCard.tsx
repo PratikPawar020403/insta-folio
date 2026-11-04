@@ -203,7 +203,7 @@ export const ProjectPostCard: React.FC<ProjectPostCardProps> = ({ project, onSha
 
       {/* 2. Interactive Multi-Slide Carousel Container */}
       <div
-        className="relative w-full h-[270px] xs:h-[310px] sm:h-[370px] max-h-[44dvh] bg-neutral-950 overflow-hidden select-none sm:rounded-xl border-y sm:border border-neutral-200 dark:border-neutral-800"
+        className="relative w-full aspect-[3/4] bg-neutral-950 overflow-hidden select-none sm:rounded-xl border-y sm:border border-neutral-200 dark:border-neutral-800"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -237,7 +237,7 @@ export const ProjectPostCard: React.FC<ProjectPostCardProps> = ({ project, onSha
 
         {/* Slide Content */}
         <div
-          className={`w-full h-full flex flex-col justify-between p-3.5 sm:p-5 text-white bg-gradient-to-br ${activeSlide.gradient} transition-all duration-300 relative`}
+          className={`w-full h-full flex flex-col justify-between p-5 sm:p-6 text-white bg-gradient-to-br ${activeSlide.gradient} transition-all duration-300 relative`}
         >
           {activeSlide.image ? (
             <>

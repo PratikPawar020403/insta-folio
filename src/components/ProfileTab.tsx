@@ -275,7 +275,7 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
               <div
                 key={post.id}
                 onClick={() => setSelectedPost(post)}
-                className={`relative aspect-square cursor-pointer overflow-hidden group select-none flex flex-col justify-between p-2.5 sm:p-3 text-white transition-all active:scale-[0.98] ${
+                className={`relative aspect-[3/4] cursor-pointer overflow-hidden group select-none flex flex-col justify-between p-2.5 sm:p-3.5 text-white transition-all active:scale-[0.98] rounded-sm ${
                   isBreathless
                     ? 'bg-[#0B3D3A] hover:bg-[#0e4844]'
                     : 'bg-[#3B0F6B] hover:bg-[#4a1386]'
