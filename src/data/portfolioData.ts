@@ -12,8 +12,8 @@ export const USER_PROFILE = {
   linkedin: 'https://www.linkedin.com/in/pratik-s-pawar-780443358/',
   portfolioUrl: 'https://psp-02-portfolio.netlify.app/',
   postsCount: 2,
-  followersCount: '1.4k',
-  followingCount: 382,
+  followersCount: '83',
+  followingCount: 1553,
   isVerified: true,
 };
 

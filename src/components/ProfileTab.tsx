@@ -13,6 +13,7 @@ import {
   Heart,
   MessageCircle,
   Sparkles,
+  Check,
 } from 'lucide-react';
 import { PostCard } from './PostCard';
 
@@ -28,6 +29,15 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
   const [activeSubTab, setActiveSubTab] = useState<'grid' | 'saved'>('grid');
   // Selected post for full-view modal/detail view
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  const [copiedProfile, setCopiedProfile] = useState(false);
+
+  const handleShareProfile = () => {
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText(window.location.href);
+    }
+    setCopiedProfile(true);
+    setTimeout(() => setCopiedProfile(false), 2000);
+  };
 
   // Exactly post 3 and post 4 from the home feed
   const profilePosts: Post[] = [INITIAL_POSTS[2], INITIAL_POSTS[3]];
@@ -115,7 +125,9 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
             </div>
             <div>
               <p className="font-bold text-sm sm:text-base text-neutral-900 dark:text-white">
-                {USER_PROFILE.followingCount}
+                {typeof USER_PROFILE.followingCount === 'number'
+                  ? USER_PROFILE.followingCount.toLocaleString()
+                  : USER_PROFILE.followingCount}
               </p>
               <p className="text-[11px] text-neutral-500 dark:text-neutral-400">Following</p>
             </div>
@@ -178,13 +190,21 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
             <span>Contact / Hire Me</span>
           </button>
           <button
-            onClick={() => {
-              navigator.clipboard.writeText(window.location.href);
-              alert('Profile URL copied to clipboard!');
-            }}
-            className="flex-1 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-900 dark:text-white font-semibold text-xs border border-neutral-200 dark:border-neutral-700 transition-colors active:scale-98"
+            onClick={handleShareProfile}
+            className={`flex-1 py-1.5 rounded-lg font-semibold text-xs border transition-all active:scale-98 flex items-center justify-center gap-1.5 ${
+              copiedProfile
+                ? 'bg-emerald-600 text-white border-emerald-600 dark:bg-emerald-600 dark:border-emerald-600 shadow-sm'
+                : 'bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-900 dark:text-white border-neutral-200 dark:border-neutral-700'
+            }`}
           >
-            Share Profile
+            {copiedProfile ? (
+              <>
+                <Check size={13} className="text-white" />
+                <span>Link Copied</span>
+              </>
+            ) : (
+              <span>Share Profile</span>
+            )}
           </button>
         </div>
 
@@ -249,8 +269,6 @@ export const ProfileTab: React.FC<ProfileTabProps> = ({
         /* Only Show Post 3 and Post 4 from Home Feed */
         <div className="grid grid-cols-3 gap-0.5 sm:gap-1">
           {profilePosts.map((post, index) => {
-            // Post 3 is index 0 in profilePosts: Wispr Breathless (#0B3D3A & #FF6B4A)
-            // Post 4 is index 1 in profilePosts: Wispr Diwali (#3B0F6B & #FF7AB6)
             const isBreathless = post.id === 'post-wispr-breathless';
 
             return (
